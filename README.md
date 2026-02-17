@@ -1,4 +1,4 @@
-# 🧬 Protein Sequence Classifier
+# Protein Sequence Classifier
 
 A production-grade, modular machine learning framework for binary classification of protein sequences using classical ML, neural networks, and transformer embeddings.
 
@@ -19,7 +19,7 @@ Other applicable tasks:
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 protein-seq-classifier/
@@ -52,7 +52,7 @@ protein-seq-classifier/
 
 ---
 
-## ⚙️ Installation
+##  Installation
 
 ### 1. Clone the repository
 
@@ -97,7 +97,7 @@ pip install fair-esm
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Training
 
@@ -148,7 +148,7 @@ python classify.py \
 
 ---
 
-## 📊 Output Files
+##  Output Files
 
 After training, the `results/` directory contains:
 
@@ -203,7 +203,7 @@ seq_id | description | sequence_length | predicted_class | class_name | confiden
 
 ---
 
-## 🧬 Feature Extractors
+##  Feature Extractors
 
 All extractors are pluggable and implement `fit/transform` (sklearn-compatible):
 
@@ -244,7 +244,7 @@ extractors.append(("my_extractor", MyExtractor(**params)))
 
 ---
 
-## 🤖 Adding New Models
+##  Adding New Models
 
 ### Classical Model
 
@@ -271,7 +271,7 @@ Add a new architecture in `src/neural_models.py`, then register it in `build_all
 
 ---
 
-## ⚡ Performance Tips
+##  Performance Tips
 
 - **Small datasets (<500 sequences)**: Use classical ML only (`--no-neural`). LR + RF are fast and effective.
 - **Class imbalance**: Set `class_weight: "balanced"` in config (already default). For extreme imbalance, try SMOTE or threshold tuning.
@@ -279,7 +279,7 @@ Add a new architecture in `src/neural_models.py`, then register it in `build_all
 - **Speed**: Disable models you don't need in `configs/default.yaml` by setting `enabled: false`.
 - **CV folds**: Reduce `cv_folds` from 5 to 3 for faster hyperparameter search.
 
-## 🖥️ GPU Tips
+##  GPU Tips
 
 PyTorch models auto-detect CUDA if available. Check status:
 ```python
@@ -289,7 +289,7 @@ print(get_device("auto"))
 
 Force CPU mode: set `neural_models.device: "cpu"` in config.
 
-## 💾 Embedding Cache
+##  Embedding Cache
 
 Transformer embeddings are expensive. They are cached per-sequence in `.embedding_cache/`:
 - **ProtBERT** → `.embedding_cache/protbert/<md5>.npy`
@@ -305,7 +305,7 @@ Disable caching: set `use_cache: false` in config.
 
 ---
 
-## 📓 Notebook Workflow
+##  Notebook Workflow
 
 | Notebook | Description |
 |----------|-------------|
@@ -322,7 +322,7 @@ jupyter lab notebooks/
 
 ---
 
-## 🧪 Robustness Features
+##  Robustness Features
 
 - **Variable-length sequences**: One-hot pads/truncates to `max_length`; k-mer and composition work on any length
 - **Class imbalance**: Auto-detected; `class_weight='balanced'` applied everywhere; warning logged when ratio > 3:1
@@ -333,7 +333,7 @@ jupyter lab notebooks/
 
 ---
 
-## 📄 Citation
+##  Citation
 
 If you use this tool in research, please cite the underlying model papers:
 - **ProtBERT**: Elnaggar et al., 2021, *IEEE TPAMI*
@@ -341,6 +341,6 @@ If you use this tool in research, please cite the underlying model papers:
 
 ---
 
-## 📜 License
+##  License
 
 MIT License — see `LICENSE` file.
