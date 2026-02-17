@@ -1,6 +1,7 @@
 # Protein Sequence Classifier
 
 A production-grade, modular machine learning framework for binary classification of protein sequences using classical ML, neural networks, and transformer embeddings.
+Ai Assitant used : Claude Sonet | IDE : Pycharm
 
 ---
 
