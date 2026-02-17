@@ -1,0 +1,47 @@
+# =============================================================================
+# Protein Sequence Classifier - Requirements
+# =============================================================================
+# Core scientific stack
+numpy>=1.24.0
+scipy>=1.10.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# Configuration
+PyYAML>=6.0.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Dimensionality reduction (for embedding plots)
+umap-learn>=0.5.3
+
+# =============================================================================
+# Optional: Gradient boosting accelerators
+# =============================================================================
+xgboost>=1.7.0
+lightgbm>=4.0.0
+
+# =============================================================================
+# Optional: Neural models (PyTorch)
+# =============================================================================
+# torch>=2.0.0               # Install from https://pytorch.org for GPU support
+# Install CPU-only: pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# =============================================================================
+# Optional: Transformer embeddings
+# =============================================================================
+# transformers>=4.30.0       # For ProtBERT
+# fair-esm>=2.0.0            # For ESM-2 (Meta)
+# sentencepiece>=0.1.99      # Required by some ProtBERT tokenizers
+
+# =============================================================================
+# Notebooks
+# =============================================================================
+jupyter>=1.0.0
+ipykernel>=6.0.0
+ipywidgets>=8.0.0

@@ -1,0 +1,164 @@
+# =============================================================================
+# Protein Sequence Classifier - Default Configuration
+# =============================================================================
+
+project:
+  name: "protein_seq_classifier"
+  version: "1.0.0"
+  seed: 42
+  output_dir: "results"
+  log_level: "INFO"
+
+data:
+  class_a_label: 0
+  class_b_label: 1
+  class_a_name: "Class A"
+  class_b_name: "Class B"
+  min_length: 10
+  max_length: null
+  remove_duplicates: true
+  valid_amino_acids: "ACDEFGHIKLMNPQRSTVWY"
+  unknown_residue: "X"
+  replace_unknown: false
+
+features:
+  kmer:
+    k: [2, 3, 4]
+    normalize: true
+  one_hot:
+    max_length: 1000
+    flatten: true
+  physicochemical:
+    include_hydrophobicity: true
+    include_charge: true
+    include_molecular_weight: true
+    include_aromaticity: true
+  composition:
+    include_dipeptide: false
+
+embeddings:
+  protbert:
+    model_name: "Rostlab/prot_bert_bfd"
+    batch_size: 8
+    max_length: 512
+    cache_dir: ".embedding_cache/protbert"
+    use_cache: true
+    device: "auto"
+  esm:
+    model_name: "esm2_t33_650M_UR50D"
+    batch_size: 8
+    max_length: 1022
+    cache_dir: ".embedding_cache/esm"
+    use_cache: true
+    device: "auto"
+
+classical_models:
+  logistic_regression:
+    enabled: true
+    max_iter: 1000
+    C: [0.001, 0.01, 0.1, 1.0, 10.0]
+    penalty: ["l2"]
+    class_weight: "balanced"
+    cv_folds: 5
+  svm:
+    enabled: true
+    kernel: ["rbf", "linear"]
+    C: [0.1, 1.0, 10.0]
+    gamma: ["scale", "auto"]
+    class_weight: "balanced"
+    cv_folds: 5
+  random_forest:
+    enabled: true
+    n_estimators: [100, 200, 500]
+    max_depth: [null, 10, 20]
+    min_samples_split: [2, 5]
+    class_weight: "balanced"
+    cv_folds: 5
+  gradient_boosting:
+    enabled: true
+    n_estimators: [100, 200]
+    learning_rate: [0.05, 0.1]
+    max_depth: [3, 5]
+    subsample: [0.8, 1.0]
+    cv_folds: 5
+  xgboost:
+    enabled: true
+    n_estimators: [100, 200]
+    learning_rate: [0.05, 0.1]
+    max_depth: [3, 5]
+    subsample: [0.8]
+    scale_pos_weight: null
+    cv_folds: 5
+  lightgbm:
+    enabled: true
+    n_estimators: [100, 200]
+    learning_rate: [0.05, 0.1]
+    num_leaves: [31, 63]
+    class_weight: "balanced"
+    cv_folds: 5
+
+neural_models:
+  device: "auto"
+  epochs: 50
+  patience: 10
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  dropout: 0.3
+  gradient_clip: 1.0
+  cnn:
+    enabled: true
+    filters: [64, 128, 256]
+    kernel_sizes: [3, 5, 7]
+    pool_size: 2
+    dense_units: [256, 64]
+  bilstm:
+    enabled: true
+    hidden_size: 128
+    num_layers: 2
+    bidirectional: true
+    dense_units: [128, 64]
+  transformer:
+    enabled: true
+    d_model: 128
+    nhead: 4
+    num_layers: 2
+    dim_feedforward: 256
+    dense_units: [128, 64]
+
+training:
+  test_size: 0.2
+  val_size: 0.1
+  stratify: true
+  cv_folds: 5
+  cv_strategy: "stratified"
+  handle_imbalance: "class_weight"
+  feature_scaling: "standard"
+  feature_selection: null
+
+evaluation:
+  primary_metric: "f1_weighted"
+  metrics: ["accuracy", "precision", "recall", "f1", "roc_auc", "pr_auc", "mcc"]
+  calibration: true
+  threshold_tuning: true
+  confidence_threshold: 0.5
+
+ensemble:
+  enabled: true
+  methods: ["voting", "stacking"]
+  voting_strategy: "soft"
+  stacking_meta_learner: "logistic_regression"
+  weights: null
+
+visualization:
+  save_plots: true
+  plot_format: "png"
+  dpi: 150
+  show_plots: false
+  umap:
+    enabled: true
+    n_neighbors: 15
+    min_dist: 0.1
+  pca:
+    enabled: true
+    n_components: 2
