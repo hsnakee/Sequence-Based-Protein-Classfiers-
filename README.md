@@ -5,7 +5,7 @@ Ai Assitant used : Claude Sonnet | IDE : Pycharm
 
 ---
 
-## 🔬 Biological Motivation
+##  Biological Motivation
 
 This framework was designed with real biological classification tasks in mind. For example:
 
